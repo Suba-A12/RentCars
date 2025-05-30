@@ -7,8 +7,10 @@ namespace RentCars.Models
         [Key]
         public int VehicleId { get; set; }
         public string Type { get; set; }
+        public string ImageUrl { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
+        public int Mileage { get; set; }
         public string LicensePlate { get; set; }
         public  string  Status { get; set; }
         public  double DailyRate { get; set; }

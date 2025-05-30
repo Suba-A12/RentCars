@@ -9,6 +9,7 @@ namespace RentCars.Models
         public string Lname { get; set; }
         public string Fname { get; set; }
         public string License { get; set; }
+        public string Email { get; set; }
         public int Phone { get; set; }
         public ICollection<Rental> Rental { get; set; }
     }

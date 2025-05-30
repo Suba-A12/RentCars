@@ -25,6 +25,34 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @* @if (User.IsInRole("SuperAdmin")) *@
+                        @* { *@
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                                    Admin Management
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Manage Customers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Invoices" asp-action="Index">Manage Rentals</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Payments" asp-action="Index">Manage Reports</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Manage Vehicle</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="RolesAdmin" asp-action="Index">RolesAdmin</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @* } *@
+                        <li>
+                            <partial name="_VehicleSearch" />
+                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<RentCars.Models.Vehicle>
+
+@if (Model.Any())
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var item in Model)
+        {
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/Images/@item.ImageUrl" class="card-img-top" alt="Product Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Type</h5>
+                        <p class="card-text">@item.Model</p>
+                        <p class="card-text">@item.Mileage</p>
+                        <p class="card-text">@item.Status</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">SGD @item.DailyRate</span>
+                            <a asp-controller="ShoppingCartItems" asp-action="AddToCart" asp-route-id="@item.VehicleId" class="btn btn-sm btn-outline-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+}
+else
+{
+    <p>No Products Found.</p>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model IEnumerable<RentCars.Models.Vehicle>
+
+@* @{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p> 
+
+ @if(Model.Any())
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mileage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DailyRate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mileage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DailyRate)
+            </td>
+             <td>
+                <a asp-action="Edit" asp-route-id="@item.VehicleId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VehicleId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VehicleId">Delete</a>
+            </td> 
+        </tr>
+}
+    </tbody>
+</table>
+}
+else
+{
+    <p>No Vehicles Found.</p>
+} *@

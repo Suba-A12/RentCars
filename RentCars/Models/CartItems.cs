@@ -7,6 +7,7 @@ namespace RentCars.Models
     {
         [Key]
         public int CartId { get; set; }
+        public string Username { get; set; }
         public int NoOfCars { get; set; }
         public double TotalAmout { get; set; }
         public DateOnly DateCreated { get; set; }
