@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\RentCars.83aduwebzm.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\home.jpg",
+      "PackagePath": "staticwebassets\\Images\\home.jpg"
+    },
+    {
       "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

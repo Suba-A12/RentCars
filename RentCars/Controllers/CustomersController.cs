@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +15,22 @@ namespace RentCars.Controllers
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public CustomersController(ApplicationDbContext context)
+        public CustomersController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+        }
+
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> MyProfile()
+        {
+            string username = User.Identity.Name;
+            var getProfile = _context.Customer.Where(c => c.Email == username).FirstOrDefault();
+            return View(getProfile);
         }
 
         // GET: Customers
@@ -56,12 +70,20 @@ namespace RentCars.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CustomerId,Lname,Fname,License,Email,Phone")] Customer customer)
         {
-            if (ModelState.IsValid)
+            _context.Add(customer);
+            var custUserId = _context.Users.Where(u => u.Email == customer.Email).FirstOrDefault().Id;
+            var custRoleId = _context.Roles.Where(r => r.Name == "Customer").FirstOrDefault().Id;
+            var roleName = _context.Roles.Where(r => r.Name == "Customer").FirstOrDefault().Name;
+
+            var userRole = new IdentityUserRole<string>
             {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+                UserId = custUserId,
+                RoleId = custRoleId
+            };
+            _context.UserRoles.Add(userRole);
+            await _context.SaveChangesAsync();
+            return Redirect("/Identity/Account/Login");
+
             return View(customer);
         }
 

@@ -29,6 +29,12 @@ namespace RentCars.Controllers
             }
             return View(lstVehicles);
         }
+        public async Task<IActionResult> GetAllVehilces()
+        {
+
+            return View(await _context.Vehicle.ToListAsync());
+
+        }
         public async Task<IActionResult> Index()
         {
             return View(await _context.Vehicle.ToListAsync());

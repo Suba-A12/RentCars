@@ -50,6 +50,20 @@
                                 </ul>
                             </li>
                         @* } *@
+                        @* @if (User.IsInRole("Customer"))
+                        { *@
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="MyProfile">My Profile</a>
+                            </li>
+
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Invoices" asp-action="MyInvoices">My Invoices</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCartItems" asp-action="DisplayCartItems">My Cart (@ViewBag.count)</a>
+                            </li>
+
+                        @* } *@
                         <li>
                             <partial name="_VehicleSearch" />
                         </li>
