@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Images\\home.jpg"
     },
     {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\suvhondavezel.jpg",
+      "PackagePath": "staticwebassets\\Images\\suvhondavezel.jpg"
+    },
+    {
       "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

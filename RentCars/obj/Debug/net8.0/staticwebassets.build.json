@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "m3K39czk0qnfRFGn3VpBNQydg3bUkr3btMCCLd6bv4U=",
+  "Hash": "A79ECTH9EHsnBh6yEgQ5A8/8bcsFtoYeIIG3zRF3Reg=",
   "Source": "RentCars",
   "BasePath": "_content/RentCars",
   "Mode": "Default",
@@ -1380,6 +1380,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\home.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\suvhondavezel.jpg",
+      "SourceId": "RentCars",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\",
+      "BasePath": "_content/RentCars",
+      "RelativePath": "Images/suvhondavezel#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2qpwja2cpo",
+      "Integrity": "xjpl/ofU/86tIQNFQMCFOjrbIcQqnhNRUbAiEDMK+Wk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\suvhondavezel.jpg"
     },
     {
       "Identity": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\js\\site.js",
@@ -5064,6 +5085,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-p2D4H6Fnq5uN84fcgkJUWWjhwB7K5tHndLVWso81HP8="
+        }
+      ]
+    },
+    {
+      "Route": "Images/suvhondavezel.2qpwja2cpo.jpg",
+      "AssetFile": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\suvhondavezel.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "527219"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xjpl/ofU/86tIQNFQMCFOjrbIcQqnhNRUbAiEDMK+Wk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 05 Jun 2025 02:27:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "2qpwja2cpo"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/suvhondavezel.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xjpl/ofU/86tIQNFQMCFOjrbIcQqnhNRUbAiEDMK+Wk="
+        }
+      ]
+    },
+    {
+      "Route": "Images/suvhondavezel.jpg",
+      "AssetFile": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\suvhondavezel.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "527219"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xjpl/ofU/86tIQNFQMCFOjrbIcQqnhNRUbAiEDMK+Wk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 05 Jun 2025 02:27:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xjpl/ofU/86tIQNFQMCFOjrbIcQqnhNRUbAiEDMK+Wk="
         }
       ]
     },

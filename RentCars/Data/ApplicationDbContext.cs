@@ -19,5 +19,6 @@ namespace RentCars.Data
         public DbSet<RentCars.Models.Invoice> Invoice { get; set; } = default!;
         public DbSet<RentCars.Models.Maintenance> Maintenance { get; set; } = default!;
         public DbSet<RentCars.Models.Payment> Payment { get; set; } = default!;
+        public DbSet<RentCars.Models.CartItems> CartItems { get; set; } = default!;
     }
 }
