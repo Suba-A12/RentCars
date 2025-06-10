@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace RentCars.Controllers
             }
             return View(lstVehicles);
         }
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetAllVehicles()
         {
 
@@ -71,12 +73,12 @@ namespace RentCars.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VehicleId,Type,ImageUrl,Model,Year,Mileage,LicensePlate,Status,DailyRate,WeeklyRate,MonthlyRate")] Vehicle vehicle)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             return View(vehicle);
         }
 

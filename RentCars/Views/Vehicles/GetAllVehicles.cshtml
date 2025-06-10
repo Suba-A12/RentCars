@@ -2,17 +2,18 @@
 @{
 	ViewData["Title"] = "GetAllVehicles";
 }
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
 @foreach (var item in Model)
 {
-	<div class="container mt-4">
-		<div class="row row-cols-1 row-cols-md-3 g-4">
+	@* <div class="container mt-4">
+		<div class="row row-cols-1 row-cols-md-3 g-4"> *@
 			<!-- Product Card Start -->
 			<div class="col">
 				<div class="card h-100">
 					<img src="~/Images/@item.ImageUrl" class="card-img-top" alt="Product Image">
 					<div class="card-body">
-						<h5 class="card-title">@item.Type</h5>
-						<p class="card-text">@item.Model</p>
+						<h5 class="card-title">@item.Model</h5>
+						<p class="card-text">@item.Type</p>
 						<p class="card-text">@item.Mileage</p>
 						<p class="card-text">@item.Status</p>
 					</div>
@@ -24,6 +25,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		@* </div>
+	</div> *@
 }

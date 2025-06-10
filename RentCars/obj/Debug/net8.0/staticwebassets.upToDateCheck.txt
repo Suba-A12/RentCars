@@ -2,6 +2,17 @@ wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\Images\home.jpg
 wwwroot\Images\suvhondavezel.jpg
+wwwroot\Images\suvhyundaihybrid.jpg
+wwwroot\Images\suvhyundaipalisade.jpg
+wwwroot\Images\suvjeepwrangler.jpg
+wwwroot\Images\suvkiasonet.jpg
+wwwroot\Images\suvmazdacx8.jpg
+wwwroot\Images\suvmitsubishioutlander.jpg
+wwwroot\Images\suvskodakodiaq.jpg
+wwwroot\Images\suvtoyotafortuner.jpg
+wwwroot\Images\suvtoyotaharrier.jpg
+wwwroot\Images\suvvolkswagentiguan.jpg
+wwwroot\Images\suvvolvoxc90.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
