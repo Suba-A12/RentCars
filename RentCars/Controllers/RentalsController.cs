@@ -46,11 +46,12 @@ namespace RentCars.Controllers
             return View(rental);
         }
 
-        // GET: Rentals/Create
+        //GET: Rentals/Create
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId");
             ViewData["StaffId"] = new SelectList(_context.Staff, "StaffId", "StaffId");
+            
             return View();
         }
 
@@ -59,17 +60,38 @@ namespace RentCars.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RentalId,StartDate,EndDate,BookingStatus,EstimatedRentalCost,Latefee,SecurityDeposit,TotalAmount,CustomerId,StaffId")] Rental rental)
+        public async Task<IActionResult> Create([Bind("RentalId,StartDate,EndDate,BookingStatus,EstimatedRentalCost,Latefee,SecurityDeposit,TotalAmount,CustomerId,StaffId")] Rental rental, int id)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(rental);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            //if (ModelState.IsValid)
+            //{
+            var vehicleId = id;
+            rental.StaffId = 1;
+            var username = User.Identity.Name;
+            var customerId = _context.Customer.Where(g => g.Email == username).FirstOrDefault().CustomerId;
+            rental.CustomerId = customerId;
+            _context.Add(rental);
+
+            await _context.SaveChangesAsync();
+
+            RentalDetail rnt = new RentalDetail();
+            rnt.NumberOfDays = 1;
+            rnt.DailyRate = _context.Vehicle.Where(r => r.VehicleId == vehicleId).FirstOrDefault().DailyRate;
+            rnt.RentalId = rental.RentalId;
+            rnt.VehicleId = Convert.ToInt32(vehicleId);
+            _context.Add(rnt);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("AddToCart", "VehicleCartItems", new { id = id });
+            //}
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId", rental.CustomerId);
             ViewData["StaffId"] = new SelectList(_context.Staff, "StaffId", "StaffId", rental.StaffId);
             return View(rental);
+
+            //_context.Add(rental);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            
+
         }
 
         // GET: Rentals/Edit/5
@@ -161,10 +183,10 @@ namespace RentCars.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool RentalExists(int id)
         {
             return _context.Rental.Any(e => e.RentalId == id);
         }
+
     }
 }

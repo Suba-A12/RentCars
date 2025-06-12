@@ -17,7 +17,7 @@ namespace RentCars.Controllers
     public class VehicleCartItemsController : Controller
     {
         public string VehicleCartId { get; set; }
-        public const string CartSessionKey = "CartId";
+        public const string CartSessionKey = "Username";
         private readonly ApplicationDbContext _context;
 
         public VehicleCartItemsController(ApplicationDbContext context)
@@ -34,27 +34,28 @@ namespace RentCars.Controllers
             cartItem = _context.CartItems.SingleOrDefault(c => c.Username == VehicleCartId && c.VehicleId == id);
             if (cartItem == null)
             {
-                // Create a new cart item if no cart item exists.
-                cartItem = new CartItems
-                {
-                    VehicleId = id,
-                    TotalAmout = (int)_context.Vehicle.SingleOrDefault(p => p.VehicleId == id).DailyRate,
-                    Username = VehicleCartId,
-                    Vehicle = _context.Vehicle.SingleOrDefault(p => p.VehicleId == id),
-                    NoOfCars = 1,
-                    DateCreated = DateOnly.MaxValue
-                };
-                _context.CartItems.Add(cartItem);
+            // Create a new cart item if no cart item exists.
+                 cartItem = new CartItems
+                 {
+                       VehicleId = id,
+                       TotalAmout = (int)_context.Vehicle.SingleOrDefault(p => p.VehicleId == id).DailyRate,
+                       Username = VehicleCartId,
+                       //Vehicle = _context.Vehicle.SingleOrDefault(p => p.VehicleId == id),
+                       NoOfCars = 1,
+                       DateCreated = DateOnly.MaxValue
+                 };
+                    _context.CartItems.Add(cartItem);
+             }
+             else
+             {
+            //        // If the item does exist in the cart,
+            //        // then add one to the quantity.
+                   cartItem.NoOfCars++;
+             }
+                await _context.SaveChangesAsync();
+                return RedirectToAction("DisplayCartItems");
             }
-            else
-            {
-                // If the item does exist in the cart,
-                // then add one to the quantity.
-                cartItem.NoOfCars++;
-            }
-            await _context.SaveChangesAsync();
-            return RedirectToAction("DisplayCartItems");
-        }
+
         public string GetCartId()
         {
             var session = HttpContext.Session.GetString(CartSessionKey);
@@ -124,9 +125,147 @@ namespace RentCars.Controllers
 
             return Redirect("/Payments/CheckOut");
         }
-        public IActionResult Index()
+
+        // GET: CartItems
+        public async Task<IActionResult> Index()
         {
+            var applicationDbContext = _context.CartItems.Include(r => r.Vehicle);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: CartItems/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cartItems = await _context.CartItems
+                .Include(r => r.Vehicle)
+                .FirstOrDefaultAsync(m => m.CartId == id);
+            if (cartItems == null)
+            {
+                return NotFound();
+            }
+
+            return View(cartItems);
+        }
+
+        // GET: CartItems/Create
+        public IActionResult Create()
+        {
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "VehicleId");
             return View();
+        }
+
+        // POST: CartItems/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("CartId,Username,NoOfCars,TotalAmout,DateCreated,VehicleId")] CartItems cartItems)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(cartItems);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "VehicleId", cartItems.VehicleId);
+            return View(cartItems);
+        }
+
+        // GET: CartItems/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cartItems = await _context.CartItems.FindAsync(id);
+            if (cartItems == null)
+            {
+                return NotFound();
+            }
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "VehicleId", cartItems.VehicleId);
+            return View(cartItems);
+        }
+
+        // POST: CartItems/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("CartId,Username,NoOfCars,TotalAmout,DateCreated,VehicleId")] CartItems cartItems)
+        {
+            if (id != cartItems.CartId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(cartItems);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CartItemsExists(cartItems.CartId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "RoomId", cartItems.VehicleId);
+            return View(cartItems);
+        }
+
+        // GET: CartItems/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cartItems = await _context.CartItems
+                .Include(r => r.Vehicle)
+                .FirstOrDefaultAsync(m => m.CartId == id);
+            if (cartItems == null)
+            {
+                return NotFound();
+            }
+
+            return View(cartItems);
+        }
+
+        // POST: CartItems/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var cartItems = await _context.CartItems.FindAsync(id);
+            if (cartItems != null)
+            {
+                _context.CartItems.Remove(cartItems);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CartItemsExists(int id)
+        {
+            return _context.CartItems.Any(e => e.CartId == id);
         }
     }
 }

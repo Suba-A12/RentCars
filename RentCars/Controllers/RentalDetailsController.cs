@@ -18,7 +18,7 @@ namespace RentCars.Controllers
         {
             _context = context;
         }
-
+        
         // GET: RentalDetails
         public async Task<IActionResult> Index()
         {
@@ -161,7 +161,6 @@ namespace RentCars.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool RentalDetailExists(int id)
         {
             return _context.RentalDetail.Any(e => e.RentalDetailId == id);
