@@ -240,6 +240,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52b2ljZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/subad/source/repos/RentCars/RentCars/Views/Invoices/MyInvoices.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52b2ljZXNcTXlJbnZvaWNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/subad/source/repos/RentCars/RentCars/Views/Maintenances/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpbnRlbmFuY2VzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -330,6 +334,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/subad/source/repos/RentCars/RentCars/Views/Rentals/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVudGFsc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/subad/source/repos/RentCars/RentCars/Views/Rentals/MyBooking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVudGFsc1xNeUJvb2tpbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/subad/source/repos/RentCars/RentCars/Views/Reports/Create.cshtml]

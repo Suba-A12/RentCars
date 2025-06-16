@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RentCars.Data;
 using RentCars.Models;
+//using Stripe;
 
 namespace RentCars.Controllers
 {
@@ -17,6 +19,14 @@ namespace RentCars.Controllers
         public InvoicesController(ApplicationDbContext context)
         {
             _context = context;
+        }
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> MyInvoices()
+        {
+            var username = User.Identity.Name;
+            var getCustId = _context.Customer.Where(c => c.Email == username).FirstOrDefault().CustomerId;
+            var getInvoices = _context.Invoice.Where(i => i.Rental.CustomerId == getCustId).ToList();
+            return View(getInvoices);
         }
 
         // GET: Invoices

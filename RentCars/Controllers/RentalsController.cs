@@ -19,6 +19,13 @@ namespace RentCars.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> MyBooking()
+        {
+            var username = User.Identity.Name;
+            var getcustomerId = _context.Customer.Where(c => c.Email == username).FirstOrDefault().CustomerId;
+            var getRental = _context.Rental.Where(r => r.CustomerId == getcustomerId).ToList();
+            return View(getRental);
+        }
         // GET: Rentals
         public async Task<IActionResult> Index()
         {
