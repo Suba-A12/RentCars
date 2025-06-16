@@ -26,7 +26,7 @@ namespace RentCars.Controllers
             _context = context;
 
         }
-
+        
         public async Task<IActionResult> AddToCart(int id)
         {
             VehicleCartId = GetCartId();
@@ -34,27 +34,28 @@ namespace RentCars.Controllers
             cartItem = _context.CartItems.SingleOrDefault(c => c.Username == VehicleCartId && c.VehicleId == id);
             if (cartItem == null)
             {
-            // Create a new cart item if no cart item exists.
-                 cartItem = new CartItems
-                 {
-                       VehicleId = id,
-                       TotalAmout = (int)_context.Vehicle.SingleOrDefault(p => p.VehicleId == id).DailyRate,
-                       Username = VehicleCartId,
-                       //Vehicle = _context.Vehicle.SingleOrDefault(p => p.VehicleId == id),
-                       NoOfCars = 1,
-                       DateCreated = DateOnly.MaxValue
-                 };
-                    _context.CartItems.Add(cartItem);
-             }
-             else
-             {
-            //        // If the item does exist in the cart,
-            //        // then add one to the quantity.
-                   cartItem.NoOfCars++;
-             }
-                await _context.SaveChangesAsync();
-                return RedirectToAction("DisplayCartItems");
+                // Create a new cart item if no cart item exists.
+                cartItem = new CartItems
+                {
+                    VehicleId = id,
+                    TotalAmout = (int)_context.Vehicle.SingleOrDefault(p => p.VehicleId == id).DailyRate,
+                    Username = VehicleCartId,
+                  //Vehicle = _context.Vehicle.SingleOrDefault(p => p.VehicleId == id),
+                    NoOfCars = 1,
+                    DateCreated = DateOnly.FromDateTime(DateTime.Now)
+                };
+                _context.CartItems.Add(cartItem);
             }
+            else
+            {
+                  // If the item does exist in the cart,
+                 // then add one to the quantity.
+               cartItem.NoOfCars++;
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("DisplayCartItems");
+        }
+
 
         public string GetCartId()
         {
@@ -113,12 +114,12 @@ namespace RentCars.Controllers
             }
 
             var paymentStatus = "Paid";
-            var custId = _context.Customer.Where(c => c.Email == username).FirstOrDefault().CustomerId;
+            var rntId = _context.Customer.Where(c => c.Email == username).FirstOrDefault().CustomerId;
             Invoice inv = new Invoice();
             inv.Date = DateOnly.FromDateTime(DateTime.Now);
             inv.TotalAmount = TAmount;
             inv.PaymentStatus = paymentStatus;
-            inv.RentalId = custId;
+            inv.RentalId = rntId;
             _context.Invoice.Add(inv);
 
             await _context.SaveChangesAsync();

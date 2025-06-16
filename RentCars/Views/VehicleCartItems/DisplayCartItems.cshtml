@@ -24,9 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateCreated)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Vehicle.DailyRate)
-            </th>
+            </th> *@
             <th>
                 Total Amount
             </th>
@@ -53,9 +53,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateCreated)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.DailyRate)
-            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.DailyRate)                
+            </td> *@
                 <td>
                     @{
                         var tamount = item.NoOfCars * item.TotalAmout;
