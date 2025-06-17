@@ -30,7 +30,7 @@ namespace RentCars.Controllers
             }
             return View(lstVehicles);
         }
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer, Admin")]
         public async Task<IActionResult> GetAllVehicles()
         {
 

@@ -114,7 +114,7 @@ namespace RentCars.Controllers
             }
 
             var paymentStatus = "Paid";
-            var rntId = _context.Customer.Where(c => c.Email == username).FirstOrDefault().CustomerId;
+            var rntId = _context.Rental.Where(c => c.Customer.Email == username).FirstOrDefault().RentalId;
             Invoice inv = new Invoice();
             inv.Date = DateOnly.FromDateTime(DateTime.Now);
             inv.TotalAmount = TAmount;
