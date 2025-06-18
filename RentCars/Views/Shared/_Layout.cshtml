@@ -36,18 +36,31 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Manage Customers</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Invoices" asp-action="Index">Manage Rentals</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Invoices" asp-action="Index">Manage Invoices</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Payments" asp-action="Index">Manage Reports</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Rentals" asp-action="Index">Manage Rentals</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">Manage Vehicle</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">Manage Vehicles</a>
                                     </li>
                                     <li>
                                         <a class="nav-link text-dark" asp-area="" asp-controller="RolesAdmin" asp-action="Index">RolesAdmin</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                                    Manage Reports
+                                </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reports" asp-action="Index">List of Reports</a>
+                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Maintenances" asp-action="Index">Manage Maintenance</a>
+                                    </li>
+                            </ul>
                             </li>
                          }
                         @if (User.IsInRole("Customer"))

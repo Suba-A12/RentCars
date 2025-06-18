@@ -26,10 +26,62 @@ namespace RentCars.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Success()
+        //public IActionResult Success()
+        //{
+        //    var amount = TempData["Amount"] != null ? Convert.ToDouble(TempData["Amount"]) : 0.0;
+        //    int invoiceId = 1;   
+        //    var payment = new Payment
+        //    {
+        //        Amount = amount,
+        //        PaymentDate = DateOnly.FromDateTime(DateTime.Now),
+        //        PaymentType = "Stripe",
+        //        InvoiceId = invoiceId
+        //    };
+
+        //    _context.Payment.Add(payment);
+        //    _context.SaveChanges();
+        //    return View();
+        //}
+        public async Task<IActionResult> Success(string session_id)
         {
+            // 1. Fetch the Stripe session
+            var service = new Stripe.Checkout.SessionService();
+            var session = await service.GetAsync(session_id);
+
+            // 2. Get the amount paid (Stripe stores in cents)
+            double amount = session.AmountTotal.HasValue ? session.AmountTotal.Value / 100.0 : 0.0;
+
+            // 3. Get the current user and their rental (adjust as needed)
+            var username = User.Identity.Name;
+            var rental = _context.Rental.FirstOrDefault(r => r.Customer.Email == username);
+            if (rental == null)
+                return BadRequest("No rental found for user.");
+
+            // 4. Create the invoice
+            var invoice = new RentCars.Models.Invoice
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                TotalAmount = amount,
+                PaymentStatus = "Paid",
+                RentalId = rental.RentalId
+            };
+            _context.Invoice.Add(invoice);
+            await _context.SaveChangesAsync(); // Save to get InvoiceId
+
+            // 5. Create the payment record
+            var payment = new Payment
+            {
+                Amount = amount,
+                PaymentDate = DateOnly.FromDateTime(DateTime.Now),
+                PaymentType = "Stripe",
+                InvoiceId = invoice.InvoiceId
+            };
+            _context.Payment.Add(payment);
+            await _context.SaveChangesAsync();
+
             return View();
         }
+
 
         public IActionResult Cancel()
         {
@@ -55,6 +107,8 @@ namespace RentCars.Controllers
                 var total = item.TotalAmout * item.NoOfCars;
                 TAmount = TAmount + total;
             }
+            var successUrl = $"{Request.Scheme}://{Request.Host}/Payments/Success?session_id={{CHECKOUT_SESSION_ID}}";
+            var cancelUrl = $"{Request.Scheme}://{Request.Host}/Payments/Cancel";
 
             // Create a Stripe Checkout Session
             var options = new SessionCreateOptions
@@ -80,8 +134,11 @@ namespace RentCars.Controllers
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = Url.Action("Success", "Payments", null, Request.Scheme),
-                CancelUrl = Url.Action("Cancel", "Payments", null, Request.Scheme),
+                SuccessUrl = successUrl,   // <-- Use the raw string here
+                CancelUrl = cancelUrl,
+
+                //SuccessUrl = Url.Action("Success", "Payments", null, Request.Scheme),
+                //CancelUrl = Url.Action("Cancel", "Payments", null, Request.Scheme),
             };
 
             foreach (var pro in cartItems)

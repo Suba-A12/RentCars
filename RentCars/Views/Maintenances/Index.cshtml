@@ -2,13 +2,31 @@
 
 @{
     ViewData["Title"] = "Index";
+    var vehicleSelectList = ViewData["Vehicles"] as SelectList;
+    var selectedVehicleId = Context.Request.Query["vehicleId"].ToString();
 }
 
-<h1>Index</h1>
+<h1>Maintenance</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form method="get" asp-action="Index">
+    <label for="vehicleId">Filter by Vehicle:</label>
+    <select id="vehicleId" name="vehicleId" class="form-control" style="width:200px;display:inline-block;margin-right:10px;" onchange="this.form.submit()">
+        <option value="">All Vehicles</option>
+       @foreach (SelectListItem vehicle in vehicleSelectList)
+        {
+            <option value="@vehicle.Value" selected="@(vehicle.Value == selectedVehicleId)">
+                @vehicle.Text
+            </option>
+        }
+}
+    </select>
+    <noscript><input type="submit" value="Filter" class="btn btn-primary" /></noscript>
+</form>
+
 <table class="table">
     <thead>
         <tr>

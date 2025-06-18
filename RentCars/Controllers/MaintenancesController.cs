@@ -20,10 +20,18 @@ namespace RentCars.Controllers
         }
 
         // GET: Maintenances
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? vehicleId)
         {
-            var applicationDbContext = _context.Maintenance.Include(m => m.Vehicle);
-            return View(await applicationDbContext.ToListAsync());
+            ViewData["Vehicles"] = new SelectList(_context.Vehicle, "VehicleId", "VehicleId");
+            var maintenances = _context.Maintenance.Include(m => m.Vehicle);
+            if (vehicleId.HasValue)
+            {
+                return View(await maintenances.Where(m => m.VehicleId == vehicleId.Value).ToListAsync());
+            }
+            return View(await maintenances.ToListAsync());
+
+            //var applicationDbContext = _context.Maintenance.Include(m => m.Vehicle);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Maintenances/Details/5
@@ -59,12 +67,12 @@ namespace RentCars.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaintenanceId,Description,Date,Cost,VehicleId")] Maintenance maintenance)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(maintenance);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["VehicleId"] = new SelectList(_context.Vehicle, "VehicleId", "VehicleId", maintenance.VehicleId);
             return View(maintenance);
         }
