@@ -1,0 +1,64 @@
+﻿@model RentCars.Models.ReportViewModel
+
+<h2>@Model.Type</h2>
+<p>Generated on: @Model.GeneratedDate</p>
+
+<h3>Confirmed Vehicles</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Staff ID</th>
+            <th>Vehicle ID</th>
+            <th>Type</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model.ConfirmedRentals)
+        {
+            foreach (var detail in rental.RentalDetail)
+            {
+                <tr>
+                    <td>@rental.Customer?.CustomerId</td>
+                    <td>@rental.Staff?.StaffId</td>
+                    <td>@detail.Vehicle?.VehicleId</td>
+                    <td>@detail.Vehicle?.Type</td>
+                    <td>@detail.Vehicle?.Model</td>
+                    <td>@detail.Vehicle?.Year</td>
+                    <td>@rental.BookingStatus</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@* <h3>Available Vehicles</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Vehicle ID</th>
+            <th>Type</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model.AvailableRentals)
+        {
+            foreach (var detail in rental.RentalDetail)
+            {
+                <tr>
+                    <td>@detail.Vehicle?.VehicleId</td>
+                    <td>@detail.Vehicle?.Type</td>
+                    <td>@detail.Vehicle?.Model</td>
+                    <td>@detail.Vehicle?.Year</td>
+                    <td>@rental.BookingStatus</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table> *@

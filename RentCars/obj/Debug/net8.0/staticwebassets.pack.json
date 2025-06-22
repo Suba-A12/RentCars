@@ -9,6 +9,54 @@
       "PackagePath": "staticwebassets\\Images\\home.jpg"
     },
     {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedancar.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedancar.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanhonda.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanhonda.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanhondacity.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanhondacity.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanhyndaiaccent.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanhyndaiaccent.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanmaruthi.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanmaruthi.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanmaruthidezire.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanmaruthidezire.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanmaruthiswift.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanmaruthiswift.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedanrenaultmegane.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedanrenaultmegane.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedantata.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedantata.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedantatanexon.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedantatanexon.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedantoyota.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedantoyota.jpg"
+    },
+    {
+      "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\sedantoyotacamry.jpg",
+      "PackagePath": "staticwebassets\\Images\\sedantoyotacamry.jpg"
+    },
+    {
       "Id": "C:\\Users\\subad\\source\\repos\\RentCars\\RentCars\\wwwroot\\Images\\suvhondavezel.jpg",
       "PackagePath": "staticwebassets\\Images\\suvhondavezel.jpg"
     },

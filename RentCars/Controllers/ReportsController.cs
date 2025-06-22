@@ -19,6 +19,35 @@ namespace RentCars.Controllers
             _context = context;
         }
 
+        public IActionResult GenerateVehicleReport()
+        {
+            var confirmedRentals = _context.Rental
+                .Include(r => r.Customer)
+                .Include(r => r.Staff)
+                .Include(r => r.RentalDetail)
+                .ThenInclude(rd => rd.Vehicle)
+                .Where(r => r.BookingStatus == "Confirmed")
+                .ToList();
+
+            //var availableRentals = _context.Rental
+            //    .Include(r => r.RentalDetail)
+            //    .ThenInclude(rd => rd.Vehicle)
+            //    .Where(r => r.BookingStatus == "Available")
+            //    .ToList();
+
+            var reportViewModel = new ReportViewModel
+            {
+                ReportId = 0,
+                Type = "Vehicle Report",
+                GeneratedDate = DateOnly.FromDateTime(DateTime.Now),
+                Staff = null, // Or set the currently logged-in staff if applicable
+                ConfirmedRentals = confirmedRentals,
+                //AvailableRentals = availableRentals
+            };
+
+            return View("VehicleReport", reportViewModel); 
+        }
+
         // GET: Reports
         public async Task<IActionResult> Index()
         {
