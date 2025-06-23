@@ -109,8 +109,8 @@ namespace RentCars.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(invoice);
@@ -128,7 +128,7 @@ namespace RentCars.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["RentalId"] = new SelectList(_context.Rental, "RentalId", "RentalId", invoice.RentalId);
             return View(invoice);
         }

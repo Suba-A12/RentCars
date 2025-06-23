@@ -21,7 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.BookingStatus)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.EstimatedRentalCost)
             </th>
             <th>
@@ -32,7 +32,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TotalAmount)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Customer)
             </th>
@@ -54,7 +54,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BookingStatus)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.EstimatedRentalCost)
             </td>
             <td>
@@ -65,7 +65,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalAmount)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.CustomerId)
             </td>
@@ -75,7 +75,7 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.RentalId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.RentalId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RentalId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.RentalId">Delete</a> 
             </td>
         </tr>
 }

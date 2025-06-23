@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace RentCars.Controllers
             var getRental = _context.Rental.Where(r => r.CustomerId == getcustomerId).ToList();
             return View(getRental);
         }
+
         // GET: Rentals
         public async Task<IActionResult> Index()
         {
@@ -131,8 +133,8 @@ namespace RentCars.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(rental);
@@ -150,7 +152,7 @@ namespace RentCars.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["CustomerId"] = new SelectList(_context.Customer, "CustomerId", "CustomerId", rental.CustomerId);
             ViewData["StaffId"] = new SelectList(_context.Staff, "StaffId", "StaffId", rental.StaffId);
             return View(rental);
@@ -188,7 +190,16 @@ namespace RentCars.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            if (User.IsInRole("Customer"))
+            {
+                return RedirectToAction("MyBooking");
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            
         }
         private bool RentalExists(int id)
         {

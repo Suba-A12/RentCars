@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -154,6 +155,7 @@ namespace RentCars.Controllers
             return Redirect(session.Url);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Payments
         public async Task<IActionResult> Index()
         {
@@ -233,8 +235,8 @@ namespace RentCars.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(payment);
@@ -252,7 +254,7 @@ namespace RentCars.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             ViewData["InvoiceId"] = new SelectList(_context.Invoice, "InvoiceId", "InvoiceId", payment.InvoiceId);
             return View(payment);
         }

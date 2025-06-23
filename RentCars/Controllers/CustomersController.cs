@@ -33,6 +33,7 @@ namespace RentCars.Controllers
             return View(getProfile);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Customers
         public async Task<IActionResult> Index()
         {
@@ -115,8 +116,8 @@ namespace RentCars.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(customer);
@@ -133,8 +134,16 @@ namespace RentCars.Controllers
                         throw;
                     }
                 }
+                if (User.IsInRole("Customer"))
+                {
+                    return RedirectToAction("MyProfile");
+                }
+                else
+                {
                 return RedirectToAction(nameof(Index));
             }
+            //return RedirectToAction(nameof(Index));
+            //}
             return View(customer);
         }
 

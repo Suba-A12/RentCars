@@ -37,6 +37,8 @@ namespace RentCars.Controllers
             return View(await _context.Vehicle.ToListAsync());
 
         }
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Vehicle.ToListAsync());
@@ -110,8 +112,8 @@ namespace RentCars.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
                     _context.Update(vehicle);
@@ -129,7 +131,7 @@ namespace RentCars.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            //}
             return View(vehicle);
         }
 
